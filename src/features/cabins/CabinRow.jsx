@@ -6,6 +6,8 @@ import { useDeleteCabin } from "./useDeleteCabin";
 import { HiPencil, HiSquare2Stack, HiTrash } from "react-icons/hi2";
 import { useCreateCabin } from "./useCreateCabin";
 import Modal from "../../ui/Modal";
+import ConfirmDelete from "../../ui/ConfirmDelete";
+import { Menus } from "../../ui/Menus";
 
 const TableRow = styled.div`
   display: grid;
@@ -51,6 +53,7 @@ function CabinRow({ cabin }) {
   const { deleteCabin, isDeleting } = useDeleteCabin();
   const { createCabin, isCreating } = useCreateCabin();
   const [show, setShow] = useState();
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const {
     id: cabinId,
@@ -92,19 +95,39 @@ function CabinRow({ cabin }) {
           <button onClick={() => setShow(() => !show)} disabled={isDeleting}>
             <HiPencil />
           </button>
-          <button onClick={() => deleteCabin(cabinId)} disabled={isDeleting}>
+          {show && (
+            <Modal onClose={() => setShow(() => !show)}>
+              <CreateCabinForm
+                cabinToEdit={cabin}
+                onCloseModal={() => setShow(false)}
+              />
+            </Modal>
+          )}
+          <button
+            onClick={() => setShowConfirm(() => !showConfirm)}
+            disabled={isDeleting}
+          >
             <HiTrash />
           </button>
+          {showConfirm && (
+            <Modal onClose={() => setShowConfirm(() => !showConfirm)}>
+              <ConfirmDelete
+                onConfirm={() => deleteCabin(cabinId)}
+                closeModal={() => setShowConfirm(() => !showConfirm)}
+              />
+            </Modal>
+          )}
+          <Menus.Menu>
+            <Menus.Toggle />
+
+            <Menus.List>
+              <Menus.Button>Duplicate</Menus.Button>
+              <Menus.Button>Edit</Menus.Button>
+              <Menus.Button>Delete</Menus.Button>
+            </Menus.List>
+          </Menus.Menu>
         </div>
       </TableRow>
-      {show && (
-        <Modal onClose={() => setShow(() => !show)}>
-          <CreateCabinForm
-            cabinToEdit={cabin}
-            onCloseModal={() => setShow(false)}
-          />
-        </Modal>
-      )}
     </>
   );
 }
