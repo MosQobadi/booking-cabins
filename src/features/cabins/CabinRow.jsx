@@ -5,6 +5,7 @@ import CreateCabinForm from "./CreateCabinForm";
 import { useDeleteCabin } from "./useDeleteCabin";
 import { HiPencil, HiSquare2Stack, HiTrash } from "react-icons/hi2";
 import { useCreateCabin } from "./useCreateCabin";
+import Modal from "../../ui/Modal";
 
 const TableRow = styled.div`
   display: grid;
@@ -96,7 +97,14 @@ function CabinRow({ cabin }) {
           </button>
         </div>
       </TableRow>
-      {show && <CreateCabinForm cabinToEdit={cabin} />}
+      {show && (
+        <Modal onClose={() => setShow(() => !show)}>
+          <CreateCabinForm
+            cabinToEdit={cabin}
+            onCloseModal={() => setShow(false)}
+          />
+        </Modal>
+      )}
     </>
   );
 }

@@ -131,8 +131,8 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
       <FormRow>
         <Button
           $variation="secondary"
+          onClick={() => onCloseModal?.()}
           type="reset"
-          onClick={() => onCloseModal()}
         >
           Cancel
         </Button>

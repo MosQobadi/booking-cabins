@@ -1,6 +1,7 @@
 import { createPortal } from "react-dom";
 import { HiXMark } from "react-icons/hi2";
 import styled from "styled-components";
+import useClickOutside from "../hooks/useClickOutside";
 
 const StyledModal = styled.div`
   position: fixed;
@@ -9,7 +10,8 @@ const StyledModal = styled.div`
   transform: translate(-50%, -50%);
   background-color: var(--color-grey-0);
   border-radius: var(--border-radius-lg);
-  box-shadow: var(--shadow-lg);
+  /* box-shadow: var(--shadow-lg); */
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 10px 20px;
   padding: 3.2rem 4rem;
   transition: all 0.5s;
 `;
@@ -21,7 +23,7 @@ const Overlay = styled.div`
   width: 100%;
   height: 100vh;
   background-color: var(--backdrop-color);
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(5px);
   z-index: 1000;
   transition: all 0.5s;
 `;
@@ -52,11 +54,13 @@ const Button = styled.button`
 `;
 
 export default function Modal({ children, onClose }) {
+  const ref = useClickOutside({ handler: onClose, listenerCapturing: true });
+
   return createPortal(
     <Overlay>
-      <StyledModal>
-        <Button onClick={() => onClose()}>
-          <HiXMark></HiXMark>
+      <StyledModal ref={ref}>
+        <Button onClick={onClose}>
+          <HiXMark />
         </Button>
         <div>{children}</div>
       </StyledModal>
