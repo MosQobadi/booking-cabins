@@ -14,6 +14,7 @@ export function useDeleteCabin() {
         queryKey: ["cabins"],
       });
     },
+
     onError: (err) => {
       toast.error(err.message);
     },

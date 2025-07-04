@@ -1,9 +1,13 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-const TableOperations = styled.div`
+const StyledTableOperations = styled.div`
   display: flex;
   align-items: center;
   gap: 1.6rem;
 `;
+
+function TableOperations({ children }) {
+  return <StyledTableOperations>{children}</StyledTableOperations>;
+}
 
 export default TableOperations;

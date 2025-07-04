@@ -89,12 +89,6 @@ function CabinRow({ cabin }) {
           <span>&mdash;</span>
         )}
         <div>
-          <button onClick={() => handleDuplicate()} disabled={isCreating}>
-            <HiSquare2Stack />
-          </button>
-          <button onClick={() => setShow(() => !show)} disabled={isDeleting}>
-            <HiPencil />
-          </button>
           {show && (
             <Modal onClose={() => setShow(() => !show)}>
               <CreateCabinForm
@@ -103,12 +97,6 @@ function CabinRow({ cabin }) {
               />
             </Modal>
           )}
-          <button
-            onClick={() => setShowConfirm(() => !showConfirm)}
-            disabled={isDeleting}
-          >
-            <HiTrash />
-          </button>
           {showConfirm && (
             <Modal onClose={() => setShowConfirm(() => !showConfirm)}>
               <ConfirmDelete
@@ -118,12 +106,26 @@ function CabinRow({ cabin }) {
             </Modal>
           )}
           <Menus.Menu>
-            <Menus.Toggle />
-
-            <Menus.List>
-              <Menus.Button>Duplicate</Menus.Button>
-              <Menus.Button>Edit</Menus.Button>
-              <Menus.Button>Delete</Menus.Button>
+            <Menus.Toggle id={cabinId} />
+            <Menus.List id={cabinId}>
+              <Menus.Button
+                onClick={() => handleDuplicate()}
+                icon={<HiSquare2Stack />}
+              >
+                Duplicate
+              </Menus.Button>
+              <Menus.Button
+                onClick={() => setShow(() => !show)}
+                icon={<HiPencil />}
+              >
+                Edit
+              </Menus.Button>
+              <Menus.Button
+                onClick={() => setShowConfirm(() => !showConfirm)}
+                icon={<HiTrash />}
+              >
+                Delete
+              </Menus.Button>
             </Menus.List>
           </Menus.Menu>
         </div>
