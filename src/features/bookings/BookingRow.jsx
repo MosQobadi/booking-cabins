@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Tag from "../../ui/Tag";
-import Table from "../../ui/Table";
+// import Table from "../../ui/Table";
 import { format, isToday } from "date-fns";
 import { formatCurrency, formatDistanceFromNow } from "../../utils/helpers";
 

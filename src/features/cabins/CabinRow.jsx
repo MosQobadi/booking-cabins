@@ -102,6 +102,7 @@ function CabinRow({ cabin }) {
               <ConfirmDelete
                 onConfirm={() => deleteCabin(cabinId)}
                 closeModal={() => setShowConfirm(() => !showConfirm)}
+                disabled={isDeleting}
               />
             </Modal>
           )}

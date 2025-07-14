@@ -16,7 +16,7 @@ export function useDeleteCabin() {
     },
 
     onError: (err) => {
-      toast.error(err.message);
+      toast.error(err.message, { id: "delete-cabin-error" });
     },
   });
 
