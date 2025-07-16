@@ -63,6 +63,8 @@ function BookingRow({
     "checked-out": "silver",
   };
 
+  if (!guestName) return;
+
   return (
     <TableRow role="row">
       <Cabin>{cabinName}</Cabin>
