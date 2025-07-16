@@ -4,6 +4,7 @@ import Menus from "../../ui/Menus";
 import Empty from "../../ui/Empty";
 import { useBookings } from "./useBookings";
 import BookingRow from "./BookingRow";
+import Pagination from "../../ui/Pagination";
 
 const Table = styled.div`
   border: 1px solid var(--color-grey-200);
@@ -24,6 +25,17 @@ const TableHeader = styled.header`
   font-weight: 600;
   color: var(--color-grey-600);
   padding: 1.6rem 2.4rem;
+`;
+
+const Footer = styled.footer`
+  background-color: var(--color-grey-50);
+  display: flex;
+  justify-content: center;
+  padding: 1.2rem;
+
+  &:not(:has(*)) {
+    display: none;
+  }
 `;
 
 function BookingTable() {
@@ -48,6 +60,9 @@ function BookingTable() {
             <BookingRow key={booking.id} booking={booking} />
           ))}
         </Table>
+        <Footer>
+          <Pagination count={count} />
+        </Footer>
       </Menus>
     </div>
   );
